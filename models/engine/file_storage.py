@@ -13,7 +13,7 @@ class FileStorage:
         if cls is not None:
             return cls.__objects
         else:
-            return self.__objects
+            return self.__class.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
