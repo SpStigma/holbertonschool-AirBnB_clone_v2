@@ -9,11 +9,10 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
+        """Returns a list of objects of objects of one type of class"""
         if cls is not None:
             return cls.__objects
         else:
-            # If cls is not specified, return all objects from all classes
             return self.__objects
 
     def new(self, obj):
