@@ -11,6 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from sqlalchemy.orm import scoped_session
+from models.user import User
 
 class DBStorage:
     """"""
