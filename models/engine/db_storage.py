@@ -10,7 +10,6 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-from models.state import User
 from sqlalchemy.orm import scoped_session
 
 class DBStorage:
@@ -34,10 +33,10 @@ class DBStorage:
     def all(self, cls=None):
         """Query objects from the current database session."""
         result = {}
-        classes_to_query = [User, State, City, Amenity, Place, Review] if cls is None else [cls]
+        classes_to_query = [State, City, Amenity, Place, Review] if cls is None else [cls]
 
         for class_obj in classes_to_query:
-            objects = self.__session.query(class_obj).all()
+            objects = self.__session.query(class_obj)
             for obj in objects:
                 key = "{}.{}".format(obj.__class__.__name__, obj.id)
                 result[key] = obj
