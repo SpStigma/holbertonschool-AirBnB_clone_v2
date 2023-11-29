@@ -9,12 +9,22 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a list of objects of objects of one type of class"""
+        """Returns a dictionary of models currently in storage"""
+        # If cls is specified, filter objects by the exact class type
         if cls is not None:
-            return {k: v for k, v in self.__objects.items()
-                    if isinstance(v, cls)}
+            filtered_objects = {}
+
+            # Iterate through __objects to find the specified class type
+            for key, obj in FileStorage.__objects.items():
+                if type(obj) is cls:
+                    # Add the object to the filtered list
+                    filtered_objects[key] = obj
+
+            # Return the filtered list of objects
+            return filtered_objects
         else:
-            return self.__objects
+            # If cls is not specified, return all objects in __objects
+            return FileStorage.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
