@@ -129,6 +129,9 @@ class HBNBCommand(cmd.Cmd):
 
         for parametre in parametres:
             key, value = parametre.split('=')
+            
+            
+            
             value = value.replace('"', '')
             value = value.replace("_", " ")
             if isinstance(value, float):
@@ -137,8 +140,9 @@ class HBNBCommand(cmd.Cmd):
                 value = int(value)
             setattr(new_instance, key, value)
 
-        storage.save()
         print(new_instance.id)
+        storage.new(new_instance)
+        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
