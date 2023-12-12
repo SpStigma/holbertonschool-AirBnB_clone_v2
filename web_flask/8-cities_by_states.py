@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-"""Starts a Flask web application"""
-
+"""Web App with Flask"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
+from models.city import City
 
 app = Flask(__name__)
 
@@ -18,9 +18,11 @@ def teardown(exception):
 def cities_by_states():
     """Display a HTML page with a list of all State objects in DBStorage."""
     states = storage.all(State)
-    sorted_states = sorted(states.values(), key=lambda x: x.name)
+    cities = storage.all(City)
 
-    return render_template("8-cities_by_states.html", states=sorted_states)
+    return render_template("8-cities_by_states.html",
+                           cities=cities,
+                           states=states)
 
 
 if __name__ == "__main__":
