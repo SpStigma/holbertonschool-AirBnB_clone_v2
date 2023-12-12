@@ -71,6 +71,5 @@ class FileStorage:
                 del self.__objects[key]
                 self.save()
 
-
     def close(self):
         self.reload()
