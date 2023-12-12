@@ -8,6 +8,12 @@ from models.city import City
 app = Flask(__name__)
 
 
+@app.teardown_appcontext
+def teardown(exception):
+    """Remove the current SQLAlchemy Session"""
+    storage.close()
+
+
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_by_states():
     """Display a HTML page with a list of all State objects in DBStorage."""
@@ -17,12 +23,6 @@ def cities_by_states():
     return render_template("8-cities_by_states.html",
                            cities=cities,
                            states=states)
-
-
-@app.teardown_appcontext
-def teardown(exception):
-    """Remove the current SQLAlchemy Session"""
-    storage.close()
 
 
 if __name__ == "__main__":
